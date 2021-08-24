@@ -1,156 +1,250 @@
 {% extends 'base.html' %}
-
+{%load static%}
 {% block title %} C++ Easy Projects{% endblock title %}
 
 {% block body %}<div class="container my-3">
-    <div class="my-4 text-center"><b>Select from below ice-cream</b></div>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=ruby&amp%3Bskin=sunburst"></script>
+  <div class="container">
+  <div class="panel panel-default">
+    <h3>Beginner Level C++ Project Ideas</h3>
+    <div class="panel-heading">
+      <img src="{% static 'c++.png' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="panel-body">
+    <h4>1. Casino Number Guessing Game</h4>
+      <p>This is an exciting project, where we will learn about the library used for random numbers: cstdlib. The program asks for a betting amount and then asks the user to guess a number on rolling. If the random number generated matches the user input, he wins, else money is deducted. The user can keep playing until he loses all the amount he put in initially. Here is the source code:
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-        <img src="https://source.unsplash.com/1200x900/?nature,water" class="d-block w-100" alt="...">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+      </p> <h5>Source Code: </h5>
+      <pre class= "prettyprint">
+        #include <iostream>
+          #include <string> // Needed to use strings
+          #include <cstdlib> // Needed to use random numbers
+          #include <ctime>
+          using namespace std;
+          void rules();
+          int main()
+          {
+              string playerName;
+              int balance; // stores player's balance
+              int bettingAmount;
+              int guess;
+              int dice; // stores the random number
+              char choice;
+              srand(time(0)); // "Seed" the random generator
+              cout << "\n\t\t========WELCOME TO CASINO WORLD=======\n\n";
+              cout << "\n\nWhat's your Name : ";
+              getline(cin, playerName);
+              cout << "\n\nEnter the starting balance to play game : $";
+              cin >> balance;
+              do
+              {
+                  system("cls");
+                  rules();
+                  cout << "\n\nYour current balance is $ " << balance << "\n";
+          // Get player's betting balance
+                  do
+                  {
+                      cout << "Hey, " << playerName<<", enter amount to bet : $";
+                      cin >> bettingAmount;
+                      if(bettingAmount > balance)
+                          cout << "Betting balance can't be more than current balance!\n"
+                                 <<"\nRe-enter balance\n ";
+                  }while(bettingAmount > balance);
+          // Get player's numbers
+                  do
+                  {
+                      cout << "Guess any betting number between 1 & 10 :";
+                      cin >> guess;
+                      if(guess <= 0 || guess > 10)
+                          cout << "\nNumber should be between 1 to 10\n"
+                              <<"Re-enter number:\n ";
+                  }while(guess <= 0 || guess > 10);
+                  dice = rand()%10 + 1;
+                  if(dice == guess)
+                  {
+                      cout << "\n\nYou are in luck!! You have won Rs." << bettingAmount * 10;
+                      balance = balance + bettingAmount * 10;
+                  }
+                  else
+                  {
+                      cout << "Oops, better luck next time !! You lost $ "<< bettingAmount <<"\n";
+                      balance = balance - bettingAmount;
+                  }
+                  cout << "\nThe winning number was : " << dice <<"\n";
+                  cout << "\n"<<playerName<<", You have balance of $ " << balance << "\n";
+                  if(balance == 0)
+                  {
+                      cout << "You have no money to play ";
+                      break;
+                  }
+                  cout << "\n\n-->Do you want to play again (y/n)? ";
+                  cin >> choice;
+              }while(choice =='Y'|| choice=='y');
+              cout << "\n\n\n";
+              cout << "\n\nThanks for playing the game. Your balance is $ " << balance << "\n\n";
+              return 0;
+          }
+          void rules()
+          {
+              system("cls");
+              cout << "\t\t======CASINO NUMBER GUESSING RULES!======\n";
+              cout << "\t1. Choose a number between 1 to 10\n";
+              cout << "\t2. Winner gets 10 times of the money bet\n";
+              cout << "\t3. Wrong bet, and you lose the amount you bet\n\n";
+          }
+          </pre>
 
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+       </div>
+       <div class="panel-body">
+        <h4>2. Simple Animation to Race a Drunk Man from Start to Finish</h4>
+          <p>This is an interactive console animation app, where your choice of character (any letter from a to z) will appear to move funnily from start to finish line. If he finishes the race within the specified counter (in our case, 1000000), then we print a particular message, else another message.            </p>
+          <h5>Source Code: </h5>
+          <pre class= "prettyprint">
+            #include<iostream>
+              #include<cmath>
+              #include<cstdlib>
+              #include<ctime>
+              using namespace std;
+              int main (){
+                srand(time(0));
+                const int size=60;
+                cout << "Enter a letter to begin \n ";
+                char x; cin>> x;
+                int position = size /2;
+                while (true) {
+                  cout << "|START|" ;
+                  for (int i=0; i<size;i++) {
+                    if (i == position)
+                      cout << x;
+                    else cout << " ";}
+                  cout << "|FINISH|" << endl;
+                  int move= rand()%3 - 1;
+                  position = position + move;
+                  if (position <1) {cout << "You could not finish the race!" <<endl; break;}
+                  if (position >size-1) {cout << "Yay! You finished the race" << endl; break;}
+                  for(int sleep=0; sleep< 1000000 ; ++ sleep);
+                }
+                return 0;
+              }
+              </pre>
 
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
+           </div>
 
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+           <div class="panel-body">
+            <h4>3. Sudoku Game </h4>
+              <p>We all know about the popular Sudoku game, wherein we need to arrange numbers from 1-9 such that they appear only once in a row and column of a 9x9 grid. The program uses the concept of backtracking. In this program, we have hard-coded the initial values, but you can also get the same input from the user (though that will be cumbersome for this program). The main thing to understand is the backtracking to find rows and columns that are not assigned any values (are zero). Have a look at the program, execute, and see the results:</p><h5>Source Code: </h5>
+              <pre class= "prettyprint">
+                #include <iostream>
+                  #include <cstdio>
+                  #include <cstring>
+                  #include <cstdlib>
+                  using namespace std;
+                  #define empty 0
+                  #define N 9
+                  bool isGridSafe(int grid[N][N], int row, int col, int num);
+                  bool isEmptyLocation(int grid[N][N], int &row, int &col);
+                  /* assign values to all the zero (not assigned) values for Sudoku solution
+                   */
+                  bool SolveSudoku(int grid[N][N])
+                  {
+                      int row, col;
+                      if (!isEmptyLocation(grid, row, col))
+                         return true;
+                      for (int num = 1; num <= 9; num++)
+                      {
+                          if (isGridSafe(grid, row, col, num))
+                          {
+                              grid[row][col] = num;
+                              if (SolveSudoku(grid))
+                                  return true;
+                              grid[row][col] = empty;
+                          }
+                      }
+                      return false;
+                  }
+                  /* Check for entries that don't have a value. */
+                  bool isEmptyLocation(int grid[N][N], int &row, int &col)
+                  {
+                      for (row = 0; row < N; row++)
+                          for (col = 0; col < N; col++)
+                              if (grid[row][col] == empty)
+                                  return true;
+                      return false;
+                  }
+                  /* Returns whether the assigned entry n in the particular row matches
+                     the given number num. */
+                  bool UsedInRow(int grid[N][N], int prow, int number)
+                  {
+                      for (int col = 0; col < N; col++)
+                          if (grid[prow][col] == number)
+                              return true;
+                      return false;
+                  }
+                  /* Returns true if the number num matches any number in the column */
+                  bool UsedInCol(int grid[N][N], int pcol, int number)
+                  {
+                      for (int row = 0; row < N; row++)
+                          if (grid[row][pcol] == number)
+                              return true;
+                    else
+                       return false;
+                  //Check if the entry used already in the grid box
+                  bool UsedInBox(int grid[N][N], int boxBeginRow, int boxBeginCol, int number)
 
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  {
+                      bool tf = false;
+                      for (int row = 0; row < 3; row++)
+                          for (int col = 0; col < 3; col++)
+                              if (grid[row+boxBeginRow][col+boxBeginCol] == number)
+                                  tf = true;
+                      return tf;
+                  }
+                  /* Checks if num can be assigned to a given prow,pcol location. */
+                  bool isGridSafe(int grid[N][N], int prow, int pcol, int number)
+                  {
+                      return !UsedInRow(grid, prow, number) && !UsedInCol(grid, pcol, number) &&
+                             !UsedInBox(grid, prow - prow % 3 , pcol - pcol % 3, number);
+                  }
+                  /* print result  */
+                  void printResult(int finalgrid[N][N])
+                  {
+                      for (int row = 0; row < N; row++)
+                      {
+                          for (int col = 0; col < N; col++)
+                              cout<< finalgrid[row][col]<<"  ";
+                          cout<<endl;
+                      }
+                  }
+                  /* Main */
+                  int main()
+                  {
+                      int grid[N][N] = {{0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                        {0, 0, 0, 0, 0, 3, 0, 8, 5},
+                                        {0, 0, 1, 0, 2, 0, 0, 0, 0},
+                                        {0, 0, 0, 5, 0, 7, 0, 0, 0},
+                                        {0, 0, 4, 0, 0, 0, 1, 0, 0},
+                                        {0, 9, 0, 0, 0, 0, 0, 0, 0},
+                                        {5, 0, 0, 0, 0, 0, 0, 7, 3},
+                                        {0, 0, 2, 0, 1, 0, 0, 0, 0},
+                                        {0, 0, 0, 0, 4, 0, 0, 0, 9}};
+                  if (SolveSudoku(grid) == true)
+                            printResult(grid);
+                      else
+                          cout<<"No solution found"<<endl;
+                      return 0;
+                  }
+                  </pre>
 
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+               </div>
 
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
 
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
 
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
 
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+</div>
+</div>
     </div>
 </div>{% endblock body %}

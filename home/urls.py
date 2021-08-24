@@ -24,4 +24,5 @@ urlpatterns = [
     path("easyJproject", views.easyJproject, name='easyJproject'),
     path("intmJproject", views.intmJproject, name='intmJproject'),
     path("advJproject", views.advJproject, name='advJproject'),
+    path("Worksheet", views.Worksheet, name='Worksheet'),
 ]

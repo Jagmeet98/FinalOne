@@ -41,6 +41,8 @@ def intmJproject(request):
     return render(request,'intmJproject.html')
 def advJproject(request):
     return render(request,'advJproject.html')
+def Worksheet(request):
+    return render(request,'worksheet.html')
 def contact(request):
     if request.method == "POST":
         name = request.POST['name']
